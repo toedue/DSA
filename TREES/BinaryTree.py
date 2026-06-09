@@ -15,6 +15,10 @@ class TreeNode:
 
 newBT = TreeNode("Drinks")       # Root node
 leftChild = TreeNode("Hot")      # Left child of root
+tea = TreeNode("Tea")
+coffee = TreeNode("Coffee")  
+leftChild.leftChild = tea
+leftChild.rightChild = coffee    
 rightChild = TreeNode("Cold")    # Right child of root
 
 newBT.leftChild = leftChild      # Attach Hot  to the left  of Drinks
@@ -62,3 +66,32 @@ def inOrderTraveral(rootNode):
 # Drinks
 # Cold
 inOrderTraveral(newBT) 
+
+
+
+# Post-order Traversal: visits nodes in Left → Right → Root order
+# The root is always printed LAST (after all children are done)
+# Commonly used when deleting a tree or calculating folder sizes
+#
+# Time Complexity:  O(n) — every node is visited exactly once
+# Space Complexity: O(h) — call stack depth equals the height of the tree
+#                   O(log n) balanced tree, O(n) worst case (skewed tree)
+def postOrderTraversal(rootNode):
+    if not rootNode:  # Base case: if the node is None, stop recursion
+        return
+    
+    postOrderTraversal(rootNode.leftChild)   # 1. Recurse all the way down the left side first
+    postOrderTraversal(rootNode.rightChild)  # 2. Then recurse all the way down the right side
+    print(rootNode.data)                     # 3. Only print AFTER both children are fully done
+
+# On our tree:
+#        Drinks
+#       /      \
+#     Hot      Cold
+#
+# Output:
+# Hot
+# Cold
+# Drinks
+
+postOrderTraversal(newBT)
