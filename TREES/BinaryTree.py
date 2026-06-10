@@ -43,7 +43,8 @@ def preOrderTraveral(rootNode):
 # Drinks
 # Hot
 # Cold
-preOrderTraveral(newBT)
+
+# preOrderTraveral(newBT)
 
 
 
@@ -65,7 +66,8 @@ def inOrderTraveral(rootNode):
 # Hot
 # Drinks
 # Cold
-inOrderTraveral(newBT) 
+
+# inOrderTraveral(newBT) 
 
 
 
@@ -94,4 +96,39 @@ def postOrderTraversal(rootNode):
 # Cold
 # Drinks
 
-postOrderTraversal(newBT)
+# postOrderTraversal(newBT)
+
+
+import QueueLinkedList as queue
+
+
+# Level-order Traversal: visits nodes level by level, left to right
+# Like reading a tree floor by floor from top to bottom
+#
+#        Drinks          ← level 0 (printed first)
+#       /      \
+#     Hot      Cold      ← level 1 (printed second)
+#
+# Output: Drinks → Hot → Cold
+#
+# Time Complexity:  O(n) — every node is visited exactly once
+# Space Complexity: O(n) — queue holds nodes level by level
+def levelOrderTraversal(rootNode):
+    if not rootNode:   # if tree is empty, do nothing
+        return
+    else:
+        customQueue = queue.Queue()        # create an empty queue (our waiting line)
+        customQueue.enqueue(rootNode)      # put the root in the line first
+
+        while not(customQueue.isEmpty()):          # keep going until line is empty
+            root = customQueue.dequeue()           # take the first person out of line
+            print(root.value.data)                 # print that node's data
+
+            if root.value.leftChild is not None:   # if it has a left child
+                customQueue.enqueue(root.value.leftChild)   # add left child to the line
+
+            if root.value.rightChild is not None:  # if it has a right child
+                customQueue.enqueue(root.value.rightChild)  # add right child to the line 
+
+
+levelOrderTraversal(newBT)
