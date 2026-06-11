@@ -156,6 +156,37 @@ def searchBT(rootNode, nodeValue):
 
         return "Not Found"
     
-print(searchBT(newBT, "cola"))
+# print(searchBT(newBT, "cola"))
+
+def insertNodeBT(rootNode, newNode):
+    if not rootNode:
+        rootNode = newNode
+
+    else:
+        customQueue = queue.Queue()
+        customQueue.enqueue(rootNode)
+
+        while not customQueue.isEmpty():
+            root = customQueue.dequeue()
+
+            if root.value.leftChild is not None:
+                customQueue.enqueue(root.value.leftChild)
+            else:
+                root.value.leftChild = newNode
+                return "successfully Inserted"
+            
+            if root.value.rightChild is not None:
+                customQueue.enqueue(root.value.rightChild)
+            else:
+                root.value.rightChild = newNode
+                return "successfully Inserted"
+            
+            
+newNode = TreeNode("Cola")
+print(insertNodeBT(newBT, newNode))
+levelOrderTraversal(newBT)
+
+
+
             
 
